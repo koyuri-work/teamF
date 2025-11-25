@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>時間割</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>時間割</h1>
+            <div class="header-controls">
+                <select name="term" id="term-select">
+                    <option value="2025-first">2025年度 前期</option>
+                    <option value="2025-second">2025年度 後期</option>
+                </select>
+                <a href="../kamoku_add/kamoku_add.html" class="btn">科目追加</a>
+            </div>
+        </header>
+
+        <main>
+            <div class="timetable-wrapper">
+                <table class="timetable">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>1限</th>
+                            <td>
+                                <div class="subject-cell">
+                                    <div class="subject-name">線形代数</div>
+                                    <div class="subject-room">A-101教室</div>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="subject-cell">
+                                    <div class="subject-name">プログラミング基礎</div>
+                                    <div class="subject-room">PC-Lab 3</div>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="subject-cell">
+                                    <div class="subject-name">情報理論</div>
+                                    <div class="subject-room">B-203教室</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>2限</th>
+                            <td></td>
+                            <td>
+                                <div class="subject-cell">
+                                    <div class="subject-name">微分積分学</div>
+                                    <div class="subject-room">C-301教室</div>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <div class="subject-cell">
+                                    <div class="subject-name">英語リーディング</div>
+                                    <div class="subject-room">D-405教室</div>
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>3限</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>4限</th>
+                            <td>
+                                <div class="subject-cell">
+                                    <div class="subject-name">体育</div>
+                                    <div class="subject-room">体育館</div>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>5限</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <section class="summary">
+                <h2>出欠状況サマリー</h2>
+                <p>出席: 10回, 欠席: 1回, 遅刻: 2回</p>
+            </section>
+
+            <!-- localStorage による追加科目の表示領域（追加された科目はここか表のセルに描画されます） -->
+            <section id="other-subjects" class="other-subjects">
+                <h2>その他の科目</h2>
+                <div class="other-list"></div>
+            </section>
+        </main>
+    </div>
+
+</body>
+    <script src="home.js"></script>
+</html>
