@@ -1,0 +1,29 @@
+/* Timetable grid styles: clear vertical and horizontal dividers */
+body { font-family: system-ui, -apple-system, 'Hiragino Kaku Gothic ProN', 'Meiryo', 'Yu Gothic', sans-serif; }
+
+.timetable { width: 100%; border-collapse: collapse; border-spacing: 0; }
+.timetable thead th { background: #f7f7f8; padding: 10px; text-align: center; border-bottom: 2px solid #ddd; }
+.timetable tbody th { text-align: center; padding: 8px; border-right: 2px solid #ddd; background: #fafafa; }
+
+.timetable td { vertical-align: top; padding: 8px; min-height: 56px; border-left: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; }
+
+/* vertical separator for the left header column */
+.timetable thead th:first-child, .timetable tbody th:first-child { border-right: 2px solid #ccc; }
+
+/* add stronger vertical separators between weekdays */
+.timetable td + td { border-left: 1px solid #dcdcdc; }
+
+.subject-cell { background: #fff; padding: 6px 8px; border-radius: 6px; box-shadow: 0 0 0 1px rgba(0,0,0,0.03) inset; margin-bottom: 6px; }
+.subject-name { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.subject-room { font-size: 12px; color: #666; }
+
+/* Other-subjects area */
+#other-subjects { margin-top: 20px; }
+.other-list .subject-cell { display: inline-block; margin-right: 8px; }
+
+/* Slight responsive improvements */
+@media (max-width: 720px) {
+	.timetable thead th, .timetable tbody th, .timetable td { padding: 6px; font-size: 12px; }
+	.subject-name { font-size: 13px }
+}
+
