@@ -56,6 +56,37 @@
                     <label for="credits">単位数</label>
                     <input type="number" id="credits" name="credits" min="0" max="10">
                 </div>
+
+                <h3>成績配分</h3>
+                <div class="form-group">
+                    <label for="small-test-ratio">小テスト（%）</label>
+                    <input type="number" id="small-test-ratio" name="small-test-ratio" min="0" max="100" value="30">
+                </div>
+                <div class="form-group">
+                    <label for="final-exam-ratio">期末テスト（%）</label>
+                    <input type="number" id="final-exam-ratio" name="final-exam-ratio" min="0" max="100" value="70">
+                </div>
+
+                <h3>初期成績設定</h3>
+                <div class="form-group">
+                    <label for="current-small-test-score">現在の小テスト平均点</label>
+                    <input type="number" id="current-small-test-score" name="current-small-test-score" min="0" max="100" placeholder="0">
+                </div>
+
+                <h3>出欠情報</h3>
+                <div class="form-group">
+                    <label for="attendance-count">出席回数</label>
+                    <input type="number" id="attendance-count" name="attendance-count" min="0" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="absence-count">欠席回数</label>
+                    <input type="number" id="absence-count" name="absence-count" min="0" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="late-count">遅刻回数</label>
+                    <input type="number" id="late-count" name="late-count" min="0" value="0">
+                </div>
+
                 <div class="form-actions">
                     <button type="submit" class="btn">追加</button>
                 </div>

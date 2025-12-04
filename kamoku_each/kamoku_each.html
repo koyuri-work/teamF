@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科目詳細</title>
+    <link rel="stylesheet" href="kamoku_each.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="subject-title">科目名</h1>
+            <div class="header-controls">
+                <a href="../home/home.html" class="btn-secondary">戻る</a>
+                <button id="edit-btn" class="btn-secondary">編集</button>
+            </div>
+        </header>
+
+        <main>
+            <!-- Subject Info Section -->
+            <section class="subject-info">
+                <h2>科目情報</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>担当教員:</strong> <span id="teacher-name">-</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>曜日・時限:</strong> <span id="day-period">-</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>教室:</strong> <span id="classroom">-</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>単位数:</strong> <span id="credits">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grade Distribution Section -->
+            <section class="grade-section">
+                <h2>成績配分</h2>
+                <div class="grade-chart">
+                    <canvas id="gradeChart" width="200" height="200"></canvas>
+                    <div class="grade-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ff9999;"></div>
+                            <span id="small-test-label">小テスト 30%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #99ccff;"></div>
+                            <span id="final-exam-label">期末テスト 70%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Attendance Section -->
+            <section class="attendance-section">
+                <h2>出欠情報</h2>
+                <div class="attendance-grid">
+                    <div class="attendance-item">
+                        <strong>出席:</strong> <span id="attendance-count">0</span>
+                    </div>
+                    <div class="attendance-item">
+                        <strong>欠席:</strong> <span id="absence-count">0</span>
+                    </div>
+                    <div class="attendance-item">
+                        <strong>遅刻:</strong> <span id="late-count">0</span>
+                    </div>
+                </div>
+                <div class="attendance-actions">
+                    <button id="add-attendance" class="btn-small">+1 出席</button>
+                    <button id="add-absence" class="btn-small">+1 欠席</button>
+                    <button id="add-late" class="btn-small">+1 遅刻</button>
+                </div>
+            </section>
+
+            <!-- Small Tests Section -->
+            <section class="small-tests-section">
+                <h2>小テスト管理</h2>
+                <div class="small-test-input">
+                    <input type="number" id="new-test-score" placeholder="小テストスコア（0-100）" min="0" max="100">
+                    <button id="add-test-btn" class="btn-small">追加</button>
+                </div>
+                <div id="small-tests-list" class="small-tests-list">
+                    <!-- Small tests will be listed here -->
+                </div>
+                <div class="small-test-average">
+                    <strong>平均点:</strong> <span id="average-score">-</span>
+                </div>
+            </section>
+
+            <!-- Edit Modal -->
+            <div id="edit-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h2>科目情報を編集</h2>
+                    <form id="edit-form">
+                        <div class="form-group">
+                            <label for="edit-small-test-ratio">小テスト配分（%）</label>
+                            <input type="number" id="edit-small-test-ratio" min="0" max="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-final-exam-ratio">期末テスト配分（%）</label>
+                            <input type="number" id="edit-final-exam-ratio" min="0" max="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-teacher-name">担当教員</label>
+                            <input type="text" id="edit-teacher-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-classroom">教室</label>
+                            <input type="text" id="edit-classroom">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">保存</button>
+                            <button type="button" id="cancel-edit" class="btn-secondary">キャンセル</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="kamoku_each.js"></script>
+</body>
+</html>

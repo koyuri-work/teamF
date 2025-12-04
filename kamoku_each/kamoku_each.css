@@ -1,0 +1,70 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, 'Hiragino Kaku Gothic ProN', 'Meiryo', 'Yu Gothic', sans-serif; background: #fafafa; }
+
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #ddd; }
+header h1 { font-size: 28px; }
+.header-controls { display: flex; gap: 10px; }
+
+.btn-secondary, .btn, .btn-small { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+.btn { background: #007bff; color: white; }
+.btn:hover { background: #0056b3; }
+.btn-secondary { background: #6c757d; color: white; }
+.btn-secondary:hover { background: #5a6268; }
+.btn-small { background: #28a745; color: white; padding: 6px 12px; font-size: 13px; }
+.btn-small:hover { background: #218838; }
+.btn-delete { background: #dc3545; color: white; padding: 4px 8px; font-size: 12px; border: none; border-radius: 3px; cursor: pointer; }
+.btn-delete:hover { background: #c82333; }
+
+/* Subject Info */
+.subject-info { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.subject-info h2 { margin-bottom: 15px; font-size: 20px; }
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+.info-item { padding: 10px; background: #f8f9fa; border-radius: 4px; }
+.info-item strong { display: block; margin-bottom: 5px; color: #495057; }
+
+/* Grade Section */
+.grade-section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.grade-section h2 { margin-bottom: 15px; font-size: 20px; }
+.grade-chart { display: flex; align-items: center; gap: 30px; }
+.grade-legend { display: flex; flex-direction: column; gap: 10px; }
+.legend-item { display: flex; align-items: center; gap: 10px; }
+.legend-color { width: 20px; height: 20px; border-radius: 3px; }
+
+/* Attendance Section */
+.attendance-section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.attendance-section h2 { margin-bottom: 15px; font-size: 20px; }
+.attendance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 15px; }
+.attendance-item { padding: 15px; background: #f8f9fa; border-radius: 4px; text-align: center; font-size: 18px; font-weight: bold; }
+.attendance-actions { display: flex; gap: 10px; }
+.attendance-actions button { flex: 1; }
+
+/* Small Tests Section */
+.small-tests-section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.small-tests-section h2 { margin-bottom: 15px; font-size: 20px; }
+.small-test-input { display: flex; gap: 10px; margin-bottom: 15px; }
+.small-test-input input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+.small-tests-list { margin-bottom: 15px; min-height: 40px; }
+.test-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 4px; margin-bottom: 8px; }
+.test-item span { font-weight: 500; }
+.small-test-average { padding: 15px; background: #e7f3ff; border-radius: 4px; text-align: center; font-size: 18px; font-weight: bold; }
+
+/* Modal */
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+.modal.hidden { display: none; }
+.modal-content { background: white; padding: 30px; border-radius: 8px; max-width: 500px; width: 90%; }
+.modal-content h2 { margin-bottom: 20px; }
+
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
+.form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+.form-actions { display: flex; gap: 10px; margin-top: 20px; }
+.form-actions button { flex: 1; }
+
+@media (max-width: 768px) {
+  header { flex-direction: column; align-items: flex-start; gap: 15px; }
+  .grade-chart { flex-direction: column; }
+  .attendance-grid { grid-template-columns: 1fr; }
+  .attendance-actions { flex-direction: column; }
+}

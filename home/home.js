@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   stored.forEach(sub => {
-    const { subjectName, classroom, teacherName, dayOfWeek, period } = sub;
+    const { id, subjectName, classroom, teacherName, dayOfWeek, period } = sub;
     if (!subjectName) return;
 
     if (dayOfWeek === 'other') {
@@ -34,7 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!otherList) return;
       const item = document.createElement('div');
       item.className = 'subject-cell from-storage';
+      item.style.cursor = 'pointer';
       item.innerHTML = `<div class="subject-name">${escapeHtml(subjectName)}</div><div class="subject-room">${escapeHtml(classroom || '')} ${teacherName ? '(' + escapeHtml(teacherName) + ')' : ''}</div>`;
+      item.addEventListener('click', () => {
+        window.location.href = `../kamoku_each/kamoku_each.html?id=${id}`;
+      });
       otherList.appendChild(item);
       return;
     }
@@ -44,11 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isNaN(colIdx) || isNaN(periodIdx) || colIdx < 0) return;
 
     const row = ensureRow(periodIdx);
-    const cell = row.querySelectorAll('td')[colIdx];
+    const cells = row.querySelectorAll('td');
+    const cell = cells[colIdx];
     if (!cell) return;
 
     const wrapper = document.createElement('div');
     wrapper.className = 'subject-cell from-storage';
+    wrapper.style.cursor = 'pointer';
+    wrapper.addEventListener('click', () => {
+      window.location.href = `../kamoku_each/kamoku_each.html?id=${id}`;
+    });
     const name = document.createElement('div');
     name.className = 'subject-name';
     name.textContent = subjectName;
