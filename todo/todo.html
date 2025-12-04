@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoリスト</title>
+    <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ToDoリスト</h1>
+            <div class="header-controls">
+                <a href="../home/home.html" class="btn-secondary">戻る</a>
+            </div>
+        </header>
+
+        <main>
+            <!-- Add Todo Form -->
+            <section class="add-todo-section">
+                <h2>新しいToDoを追加</h2>
+                <form id="add-todo-form">
+                    <div class="form-group">
+                        <input type="text" id="todo-title" placeholder="ToDoのタイトルを入力" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="todo-category">カテゴリ</label>
+                            <select id="todo-category">
+                                <option value="assignment">課題</option>
+                                <option value="small-test">小テスト</option>
+                                <option value="other">その他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="todo-subject">科目（選択可）</label>
+                            <select id="todo-subject">
+                                <option value="">全科目</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="todo-due-date">期限（選択可）</label>
+                        <input type="date" id="todo-due-date">
+                    </div>
+                    <button type="submit" class="btn">追加</button>
+                </form>
+            </section>
+
+            <!-- Filters -->
+            <section class="filters-section">
+                <h2>フィルタ</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">すべて</button>
+                    <button class="filter-btn" data-filter="assignment">課題</button>
+                    <button class="filter-btn" data-filter="small-test">小テスト</button>
+                    <button class="filter-btn" data-filter="pending">未完了</button>
+                    <button class="filter-btn" data-filter="completed">完了</button>
+                </div>
+            </section>
+
+            <!-- Todo List -->
+            <section class="todo-list-section">
+                <h2>ToDoリスト</h2>
+                <div id="todo-list" class="todo-list">
+                    <!-- Todos will be listed here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="todo.js"></script>
+</body>
+</html>
