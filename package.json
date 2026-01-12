@@ -1,0 +1,33 @@
+{
+  "name": "teamf",
+  "version": "1.0.0",
+  "description": "・出欠管理\r ・小テスト等の点数管理\r ・成績に入る割合(小テスト〇％、期末〇％)\r ・現時点での成績(シラバスの過去の成績の分布から予測)\r ・履修のヘルプ(専門科目があと何単位とか)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koyuri-work/teamF.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/koyuri-work/teamF/issues"
+  },
+  "homepage": "https://github.com/koyuri-work/teamF#readme",
+  "dependencies": {
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-router-dom": "^7.11.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
+    "vite": "^7.3.0"
+  }
+}
