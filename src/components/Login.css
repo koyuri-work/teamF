@@ -26,6 +26,7 @@ body {
   flex: 1; /* 親要素に合わせて広げる */
   width: 100%; /* 幅も確保 */
   padding: 20px;
+  padding-top: max(20px, env(safe-area-inset-top) + 20px); /* ノッチ対応 */
   color: white;
   text-align: center;
   box-sizing: border-box;
@@ -120,4 +121,15 @@ body {
   width: 100%;
   max-width: 320px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* スマホ実機で見たときのスタイルリセット */
+@media (max-width: 480px) {
+  body {
+    background-color: #518394;
+  }
+  #root {
+    max-width: 100%;
+    box-shadow: none;
+  }
 }

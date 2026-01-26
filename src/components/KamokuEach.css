@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 /* body background is handled globally */
 
-.kamoku-each-container { max-width: 100%; margin: 0 auto; padding: 20px; position: relative; min-height: 100vh; }
+.kamoku-each-container { max-width: 100%; margin: 0 auto; padding: 20px; padding-top: max(20px, env(safe-area-inset-top) + 20px); position: relative; min-height: 100vh; }
 
 header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 header h1 { font-size: 24px; color: white; }
@@ -18,7 +18,7 @@ header h1 { font-size: 24px; color: white; }
   text-align: center;
 }
 
-.btn-secondary, .btn, .btn-small, .btn-danger { padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+.btn-secondary, .btn, .btn-small, .btn-danger { padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer; font-size: 14px; transition: all 0.2s; height: 40px; }
 .btn { background: #56828e; color: white; }
 .btn-secondary { background: rgba(255,255,255,0.2); color: white; }
 .btn-danger { background: #dc3545; color: white; }
@@ -31,7 +31,8 @@ header h1 { font-size: 24px; color: white; }
   border-radius: 16px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: none;
+  border: 1px solid #56828e;
 }
 .card h2, .grade-section h2 { margin-bottom: 15px; font-size: 18px; color: #333; border-left: 4px solid #56828e; padding-left: 10px; }
 
@@ -178,7 +179,7 @@ header h1 { font-size: 24px; color: white; }
 .test-item span { font-weight: normal; }
 
 /* 平均点のスタイル変更（白背景・緑枠） */
-.small-test-average { padding: 15px; background: white; border: 2px solid #56828e; border-radius: 4px; text-align: center; font-size: 18px; font-weight: bold; color: #56828e; margin-top: 10px; }
+.small-test-average { padding: 15px; background: white; border: 1px solid #56828e; border-radius: 4px; text-align: center; font-size: 18px; font-weight: bold; color: #56828e; margin-top: 10px; }
 
 /* Exam Section */
 .exam-inputs {
@@ -214,11 +215,16 @@ header h1 { font-size: 24px; color: white; }
 .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
 .form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
 .form-actions { display: flex; gap: 10px; margin-top: 20px; }
-.form-actions button { flex: 1; }
+.form-actions button { 
+  flex: 1; 
+  height: 40px; 
+  margin: 0; /* 他のCSSの影響をリセット */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 @media (max-width: 768px) {
-  header { flex-direction: column; align-items: flex-start; gap: 15px; }
   .grade-chart { flex-direction: column; }
-  .attendance-grid { grid-template-columns: 1fr; }
   .attendance-actions { flex-direction: column; }
 }
