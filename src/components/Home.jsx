@@ -58,8 +58,11 @@ const Home = () => {
     navigate('/login');
   };
 
-  // ダミーの進捗データ生成
-  const getProgress = (id) => ((id * 17) % 100); 
+  // 欠席・遅刻回数の計算
+  const getAbsenceLateCount = (subject) => {
+    const history = subject.attendance_history || [];
+    return history.filter(h => h.type === '欠席' || h.type === '遅刻').length;
+  };
 
   // カテゴリーごとの背景色
   const getCategoryColor = (category) => {
@@ -79,9 +82,6 @@ const Home = () => {
     4: { start: '15:10', end: '16:50' },
     5: { start: '17:00', end: '18:40' },
   };
-
-  // 合計単位数の計算
-  const totalCredits = subjects.reduce((sum, sub) => sum + (sub.credit || 0), 0);
 
   return (
     <div className="home-container">
@@ -121,24 +121,30 @@ const Home = () => {
                 {/* 科目セル */}
                 {row.cells.map((sub, colIdx) => (
                   <div key={colIdx} className="subject-col">
-                    {sub ? (
-                      <div 
-                        className="subject-card" 
-                        style={{ backgroundColor: getCategoryColor(sub.category) }}
-                        onClick={() => handleSubjectClick(sub.id)}
-                      >
-                        <div className="subject-name">{sub.name}</div>
-                        {/* 進捗バー */}
-                        <div className="mini-progress-wrapper">
-                          <div className="mini-progress-track">
-                            <div className="mini-progress-bar" style={{ width: `${getProgress(sub.id)}%` }}></div>
+                    {sub ? (() => {
+                      const count = getAbsenceLateCount(sub);
+                      const isAlert = count >= 3;
+                      // バーの長さ: 4回で100%とする（1回につき25%）
+                      const progressPercent = Math.min(count * 25, 100);
+
+                      return (
+                        <div 
+                          className="subject-card" 
+                          style={{ backgroundColor: getCategoryColor(sub.category) }}
+                          onClick={() => handleSubjectClick(sub.id)}
+                        >
+                          {isAlert && <div className="alert-icon">!</div>}
+                          <div className="subject-name">{sub.name}</div>
+                          {/* 欠席・遅刻バー */}
+                          <div className="mini-progress-wrapper">
+                            <div className="mini-progress-track">
+                              <div className="mini-progress-bar" style={{ width: `${progressPercent}%` }}></div>
+                            </div>
+                            <span className="mini-progress-text">{count}/4</span>
                           </div>
-                          <span className="mini-progress-text">{Math.floor(getProgress(sub.id))}/4</span>
                         </div>
-                        {/* 通知バッジ */}
-                        {sub.id % 3 === 0 && <div className="notice-dot"></div>}
-                      </div>
-                    ) : (
+                      );
+                    })() : (
                       // 空のセル
                       <div className="subject-card empty-card"></div>
                     )}
@@ -147,10 +153,6 @@ const Home = () => {
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="credits-info">
-          取得予定単位数：{totalCredits}
         </div>
       </main>
 

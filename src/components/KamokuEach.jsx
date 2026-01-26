@@ -524,6 +524,21 @@ const KamokuEach = () => {
     }
   };
 
+  const handleDeleteSubject = async () => {
+    if (!window.confirm(`「${subject.name}」を本当に削除しますか？\nこの操作は取り消せません。`)) {
+      return;
+    }
+
+    try {
+      const { error } = await supabase.from('subjects').delete().eq('id', id);
+      if (error) throw error;
+      navigate('/home');
+    } catch (error) {
+      console.error('Error deleting subject:', error);
+      alert('削除に失敗しました');
+    }
+  };
+
   if (!subject) return <div>Loading...</div>;
 
   const evalData = subject.evaluation || {};
@@ -677,8 +692,9 @@ const KamokuEach = () => {
                   <input type="number" name="kimatsu" value={editForm.kimatsu} onChange={handleEditChange} />
                 </div>
                 <div className="form-actions">
-                  <button type="submit" className="btn">保存</button>
+                  <button type="button" onClick={handleDeleteSubject} className="btn-danger">削除</button>
                   <button type="button" onClick={() => setEditModal(false)} className="btn-secondary">キャンセル</button>
+                  <button type="submit" className="btn">保存</button>
                 </div>
               </form>
             </div>
