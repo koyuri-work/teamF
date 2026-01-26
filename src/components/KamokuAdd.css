@@ -1,13 +1,214 @@
-.container { max-width: 800px; margin: 0 auto; padding: 20px; }
-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.btn, .btn-secondary { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; }
-.btn { background: #007bff; color: white; }
-.btn:hover { background: #0056b3; }
-.btn-secondary { background: #6c757d; color: white; }
-.btn-secondary:hover { background: #545b62; }
+/* Modal Overlay Style */
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
 
-.subject-form { display: flex; flex-direction: column; gap: 15px; }
-.form-group { display: flex; flex-direction: column; }
-.form-group label { margin-bottom: 5px; font-weight: bold; }
-.form-group input, .form-group select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-.form-actions { margin-top: 20px; }
+.add-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 4px;
+  position: relative;
+}
+
+.add-card h1 {
+  font-size: 20px;
+  color: black;
+  margin: 0;
+  margin-right: 100px;
+}
+
+/* Todo.cssの影響を避けるため詳細度を上げる */
+.add-card .btn-back {
+  position: static;
+  background: transparent;
+  border: none;
+  color: black;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0;
+}
+
+.btn-placeholder {
+  display: none;
+}
+
+.subject-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: -20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.required {
+  color: #ff4444;
+  margin-left: 4px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #f9f9f9;
+  font-size: 14px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 19px;
+  color: #518394;
+  font-weight: 500;
+  margin: 24px 0 16px 0;
+}
+
+.section-title::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 30px;
+  background-color: #518394;
+  margin-right: 12px;
+  border-radius: 2px;
+}
+
+.btn {
+  background: #56828e;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #888;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.error-banner {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* 成績評価割合用のスタイル */
+.weight-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.weight-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weight-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.weight-input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.weight-input {
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #f9f9f9;
+  font-size: 14px;
+  width: 100%;
+  text-align: left;
+  padding-right: 30px;
+  box-sizing: border-box;
+}
+
+.weight-unit {
+  position: absolute;
+  right: 12px;
+  font-size: 14px;
+  color: #888;
+  pointer-events: none;
+}
+
+.custom-name-input {
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #f9f9f9;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}

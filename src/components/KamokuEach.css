@@ -1,54 +1,208 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: system-ui, -apple-system, 'Hiragino Kaku Gothic ProN', 'Meiryo', 'Yu Gothic', sans-serif; background: #fafafa; }
+/* body background is handled globally */
 
-.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+.kamoku-each-container { max-width: 100%; margin: 0 auto; padding: 20px; position: relative; min-height: 100vh; }
 
-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #ddd; }
-header h1 { font-size: 28px; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+header h1 { font-size: 24px; color: white; }
 .header-controls { display: flex; gap: 10px; }
 
-.btn-secondary, .btn, .btn-small { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
-.btn { background: #007bff; color: white; }
-.btn:hover { background: #0056b3; }
-.btn-secondary { background: #6c757d; color: white; }
-.btn-secondary:hover { background: #5a6268; }
-.btn-small { background: #28a745; color: white; padding: 6px 12px; font-size: 13px; }
-.btn-small:hover { background: #218838; }
+/* ヘッダーボタン（戻る・編集）のスタイル */
+.header-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  width: 40px; /* 幅を固定して左右対称にする */
+  text-align: center;
+}
+
+.btn-secondary, .btn, .btn-small { padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+.btn { background: #56828e; color: white; }
+.btn-secondary { background: rgba(255,255,255,0.2); color: white; }
+.btn-small { background: #56828e; color: white; padding: 6px 12px; font-size: 12px; }
 .btn-delete { background: #dc3545; color: white; padding: 4px 8px; font-size: 12px; border: none; border-radius: 3px; cursor: pointer; }
-.btn-delete:hover { background: #c82333; }
+
+/* Common Card Style */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.card h2, .grade-section h2 { margin-bottom: 15px; font-size: 18px; color: #333; border-left: 4px solid #56828e; padding-left: 10px; }
 
 /* Subject Info */
-.subject-info { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-.subject-info h2 { margin-bottom: 15px; font-size: 20px; }
 .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
 .info-item { padding: 10px; background: #f8f9fa; border-radius: 4px; }
 .info-item strong { display: block; margin-bottom: 5px; color: #495057; }
 
 /* Grade Section */
-.grade-section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-.grade-section h2 { margin-bottom: 15px; font-size: 20px; }
-.grade-chart { display: flex; align-items: center; gap: 30px; }
-.grade-legend { display: flex; flex-direction: column; gap: 10px; }
+.grade-section { margin-bottom: 20px; }
+.grade-chart { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.grade-chart canvas {
+  width: 220px;
+  height: 220px;
+}
+.grade-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
 .legend-item { display: flex; align-items: center; gap: 10px; }
 .legend-color { width: 20px; height: 20px; border-radius: 3px; }
 
 /* Attendance Section */
-.attendance-section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-.attendance-section h2 { margin-bottom: 15px; font-size: 20px; }
 .attendance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 15px; }
-.attendance-item { padding: 15px; background: #f8f9fa; border-radius: 4px; text-align: center; font-size: 18px; font-weight: bold; }
-.attendance-actions { display: flex; gap: 10px; }
-.attendance-actions button { flex: 1; }
+.attendance-item { padding: 15px; background: #f8f9fa; border-radius: 4px; text-align: center; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.2s; user-select: none; }
+.attendance-item:active { background: #e9ecef; transform: scale(0.98); }
+.attendance-item:hover { background: #e2e6ea; }
+
+/* .attendance-actions removed as requested */
+.attendance-actions { display: none; }
+
+
+/* Attendance History */
+.history-container {
+  margin-top: 15px;
+  position: relative;
+  padding-bottom: 30px; /* 矢印ボタン用のスペース */
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 80px; /* 2行分くらいの高さ */
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.history-container.expanded .history-list {
+  max-height: 500px; /* 十分な高さ */
+  overflow: visible;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: #555;
+  position: relative;
+  padding-right: 40px;
+}
+
+.history-menu-btn {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #999;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.history-menu-dropdown {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+  overflow: hidden;
+}
+
+.history-menu-item {
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #333;
+  background: white;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.history-menu-item:hover { background: #f5f5f5; }
+.history-menu-item.delete { color: #ff5252; }
+
+.history-fade-overlay {
+  position: absolute;
+  bottom: 30px; /* ボタンの上 */
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+  pointer-events: none;
+  z-index: 5; /* リストの上に重なるようにする */
+}
+
+.expand-button {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
 
 /* Small Tests Section */
-.small-tests-section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-.small-tests-section h2 { margin-bottom: 15px; font-size: 20px; }
 .small-test-input { display: flex; gap: 10px; margin-bottom: 15px; }
 .small-test-input input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
-.small-tests-list { margin-bottom: 15px; min-height: 40px; }
-.test-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 4px; margin-bottom: 8px; }
-.test-item span { font-weight: 500; }
-.small-test-average { padding: 15px; background: #e7f3ff; border-radius: 4px; text-align: center; font-size: 18px; font-weight: bold; }
+.small-tests-list { margin-bottom: 15px; }
+/* カードスタイルをやめて線で区切る */
+.test-item { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 8px 12px; 
+  border-bottom: 1px solid #eee; 
+  position: relative; 
+  padding-right: 40px;
+  font-size: 14px;
+  color: #555;
+  background: #fff;
+}
+.test-item:last-child { border-bottom: none; }
+.test-item span { font-weight: normal; }
+
+/* 平均点のスタイル変更（白背景・緑枠） */
+.small-test-average { padding: 15px; background: white; border: 2px solid #56828e; border-radius: 4px; text-align: center; font-size: 18px; font-weight: bold; color: #56828e; margin-top: 10px; }
+
+/* Exam Section */
+.exam-inputs {
+  display: flex;
+  gap: 20px;
+}
+.exam-input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.exam-input-group label {
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+}
+.exam-input-group input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+  background: #f9f9f9;
+}
 
 /* Modal */
 .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; }
